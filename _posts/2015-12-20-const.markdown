@@ -1,0 +1,69 @@
+---
+layout: post
+title: "Question about const"
+date: 2015-12-20 01:23:45 -0800
+tags: rust const static mutability
+---
+Constants in rust
+
+I originally asked this question on [rust reddit] but thought it would
+be nice here.
+
+I was talking to a coworker about rust and they commented on mutability.
+They asked "in languages like scala or even typscript there is a const
+symbol const x = y x = z is illegal but y.property = 'foo' is not. what
+about in rust? ". I did not know off hand so I went to play rust
+website.
+
+I figure let me try something easy. I checked [rust by example] for the
+const syntax.
+
+{% highlight rust %}
+fn main() {
+  const N: [i32; 5] = [1, 2, 3, 4, 5];
+  N[0]=2;
+  println!("{:?}", N);
+}
+{% endhighlight %}
+
+Surely rust would never let me compile this. I can not change a
+'constant'. Nope it run runs.
+{% highlight rust %}
+[1, 2, 3, 4, 5]
+{% endhighlight %}
+
+It outputs the original value of N. Nice to see the value was not
+change, however, it does not match what my code would want. Reading more
+of the docs I see there is static. Lets try that.
+
+{% highlight rust %}
+fn main() {
+  const N: [i32; 5] = [1, 2, 3, 4, 5];
+  N[0]=2;
+  println!("{:?}", N);
+}
+/*
+<anon>:6:1: 6:8 error: cannot assign to immutable indexed content
+<anon>:6 N[0]=2;
+         ^~~~~~~
+error: aborting due to previous error
+*/
+{% endhighlight %}
+
+Thats more of the response someone might expect. What is going on?
+Reading the [rust book] section on const and static it states:
+
+>Constants live for the entire lifetime of a program. More specifically,
+>constants in Rust have no fixed address in memory. This is because
+>they’re effectively inlined to each place that they’re used. References
+>to the same constant are not necessarily guaranteed to refer to the
+>same memory address for this reason.
+
+Hopefully this is something that never bites you and if it does it only
+happens once.
+
+[rust reddit]: https://www.reddit.com/r/rust/comments/3xdi5t/mutability_question/
+[rust by example]: http://rustbyexample.com/custom_types/constants.html
+[rust book]: https://doc.rust-lang.org/book/const-and-static.html
+
+This code was ran with rustc 1.5.0 (3d7cd77e4 2015-12-04).
