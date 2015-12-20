@@ -1,25 +1,23 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Start rantin"
 date:   2015-12-19 15:32:48 -0800
-categories: jekyll update
+categories: rust
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+It's my first github jektll site so expect the worse.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+Since 2006 I have been writing Ruby professionally. Something about rust
+caught my eye and I started out on a journey of learning.
 
-Jekyll also offers powerful support for code snippets:
+I have two (hopefully unused) crates. [smith_waterman] for an algorithm
+of the same name. I found it on a wiki page and thought it would be a
+nice start. Also [warc_parser] for WebARChive files. One day I will
+crawl the internet with rust.
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+I recently picked up Algorithms by Sedgewick in an effort to give me
+some guidelines in my learning. You can check out the [Github code].
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+[Github code]: https://github.com/sbeckeriv/rust-algorithms
+[smith_waterman]: https://crates.io/crates/smith_waterman/
+[warc_parser]: https://crates.io/crates/warc_parser/
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
