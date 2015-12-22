@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Story of the three little iterators"
-date: 2015-12-21 23:23:45 -0800
+date: 2015-12-22 23:23:45 -0800
 tags: rust iterators iter IntoIter
 ---
 Story of the three little iterators.
