@@ -1,0 +1,54 @@
+---
+layout: post
+title: "link list"
+date: 2016-01-02 23:23:45 -0800
+tags: rust iterators iter IntoIter
+---
+Linked List
+
+[EDIT]
+I have edited this even before I posted it. While trying to figure out a
+simple link list in rust I ran into [Learning Rust With Entirely Too
+Many Linked Lists]. This book does an amazing job at explaining
+ownership, borrowing and everything you need to know to write a link
+list from scratch. I find myself re-reading this often.
+
+[ORIGINAL]
+
+When I first wanted to learn rust I figured I would start out easy. I
+will write a linked list. This is a common first interview question and
+something I learned long ago in my school days. I was wrong. I had no
+clue what I was getting in to. Now is the time to try again.
+
+### Simple node:
+This code is not correct.
+
+{% highlight rust %}
+pub struct LinkNode<T> {
+    item: T,
+    pub next: Option<LinkNode<T>>,
+}
+
+impl<T> LinkNode<T> {
+   pub fn new(item: T) -> LinkNode<T>{
+        LinkNode {
+            item: item,
+            next: None,
+        }
+    }
+}
+{% endhighlight %}
+
+Thankful rust's complier errors are useful!
+
+> error: invalid recursive struct type [E0072]
+> run `rustc --explain E0072` to see a detailed explanation
+
+I wish all error messages were so kind. The [gist] of the error that rust
+does not know how big the LinkNode is because it includes itself. It
+even gives a suggestion on how to fix it. It suggests using a Box or a
+pointer. The size of a Box is known and acts as pointer with ownership.
+
+This code was run with rustc 1.5.0 (3d7cd77e4 2015-12-04).
+
+[Learning Rust With Entirely Too Many Linked Lists]: http://cglab.ca/~abeinges/blah/too-many-lists/book/README.html
