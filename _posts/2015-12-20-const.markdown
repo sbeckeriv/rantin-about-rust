@@ -27,7 +27,7 @@ fn main() {
 {% endhighlight %}
 
 Surely rust would never let me compile this. I can not change a
-'constant'. Nope it run runs.
+'constant'. Nope it runs.
 {% highlight rust %}
 [1, 2, 3, 4, 5]
 {% endhighlight %}
@@ -38,7 +38,7 @@ of the docs I see there is static. Lets try that.
 
 {% highlight rust %}
 fn main() {
-  const N: [i32; 5] = [1, 2, 3, 4, 5];
+  static N: [i32; 5] = [1, 2, 3, 4, 5];
   N[0]=2;
   println!("{:?}", N);
 }
