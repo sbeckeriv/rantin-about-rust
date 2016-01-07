@@ -25,17 +25,17 @@ This code is not correct.
 
 {% highlight rust %}
 pub struct LinkNode<T> {
-    item: T,
-    pub next: Option<LinkNode<T>>,
+item: T,
+pub next: Option<LinkNode<T>>,
 }
 
 impl<T> LinkNode<T> {
-   pub fn new(item: T) -> LinkNode<T>{
-        LinkNode {
-            item: item,
-            next: None,
-        }
-    }
+pub fn new(item: T) -> LinkNode<T>{
+LinkNode {
+item: item,
+next: None,
+}
+}
 }
 {% endhighlight %}
 
@@ -49,6 +49,6 @@ does not know how big the LinkNode is because it includes itself. It
 even gives a suggestion on how to fix it. It suggests using a Box or a
 pointer. The size of a Box is known and acts as pointer with ownership.
 
-This code was run with rustc 1.5.0 (3d7cd77e4 2015-12-04).
+This code was ran with rustc 1.5.0 (3d7cd77e4 2015-12-04).
 
 [Learning Rust With Entirely Too Many Linked Lists]: http://cglab.ca/~abeinges/blah/too-many-lists/book/README.html

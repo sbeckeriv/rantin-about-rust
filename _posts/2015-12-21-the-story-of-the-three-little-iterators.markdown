@@ -15,16 +15,16 @@ simple use the vec's implementation of iterator and it would be simple.
 ### The first little iterator took ownership:
 {% highlight rust %}
 pub struct Ziploc<T> {
-    data: Vec<T>,
+data: Vec<T>,
 }
 
 impl<T> IntoIterator for Ziploc<T> {
-    type Item = T;
-    type IntoIter = ::std::vec::IntoIter<T>;
+type Item = T;
+type IntoIter = ::std::vec::IntoIter<T>;
 
-    fn into_iter(self) -> Self::IntoIter {
-        self.data.into_iter()
-    }
+fn into_iter(self) -> Self::IntoIter {
+self.data.into_iter()
+}
 }
 {% endhighlight %}
 
@@ -33,12 +33,12 @@ This code is fine if you never need to use the object after the loop. Iterating 
 ### The second little iterator took a slice:
 {% highlight rust %}
 impl<'a, T> IntoIterator for &'a Ziploc<T> {
-    type Item = &'a T;
-    type IntoIter = ::std::slice::Iter<'a, T>;
+type Item = &'a T;
+type IntoIter = ::std::slice::Iter<'a, T>;
 
-    fn into_iter(self) -> Self::IntoIter {
-        self.data.iter()
-    }
+fn into_iter(self) -> Self::IntoIter {
+self.data.iter()
+}
 }
 {% endhighlight %}
 
@@ -56,17 +56,17 @@ not need lifetime specifier if you are using them in the impl.
 ### The third little iterator liked to change:
 {% highlight rust %}
 impl<'a, T> IntoIterator for &'a mut Ziploc<T> {
-    type Item = &'a mut T;
-    type IntoIter = ::std::slice::IterMut<'a, T>;
-    fn into_iter(self) -> Self::IntoIter {
-        self.data.iter_mut()
-    }
+type Item = &'a mut T;
+type IntoIter = ::std::slice::IterMut<'a, T>;
+fn into_iter(self) -> Self::IntoIter {
+self.data.iter_mut()
+}
 }
 //main
-    let mut z = Ziploc { data: vec![1,2,3] };
-    for i in &mut z {
-      *i = 1;
-    }
+let mut z = Ziploc { data: vec![1,2,3] };
+for i in &mut z {
+*i = 1;
+}
 {% endhighlight %}
 
 A mutable iterator is the last of the 3. True be told I had to read the
@@ -83,42 +83,42 @@ Full files and github history [here]
 [here]: https://github.com/sbeckeriv/rust-algorithms/tree/master/chapter-1/3/simple_bag/src
 [moved]: https://doc.rust-lang.org/error-index.html#E0382
 
-This code was run with rustc 1.5.0 (3d7cd77e4 2015-12-04).
+This code was ran with rustc 1.5.0 (3d7cd77e4 2015-12-04).
 
 {% highlight rust %}
 //example from mbrubeck on irc
 pub struct Ziploc<T> {
-    data: Vec<T>,
+data: Vec<T>,
 }
 impl<T> Ziploc<T> {
-    pub fn new() -> Ziploc<T> {
-        Ziploc { data: Vec::new() }
-    }
+pub fn new() -> Ziploc<T> {
+Ziploc { data: Vec::new() }
+}
 }
 impl<'a, T> IntoIterator for &'a Ziploc<T> {
-    type Item = &'a T;
-    type IntoIter = ::std::slice::Iter<'a, T>;
-    fn into_iter(self) -> Self::IntoIter {
-        self.data.iter()
-    }
+type Item = &'a T;
+type IntoIter = ::std::slice::Iter<'a, T>;
+fn into_iter(self) -> Self::IntoIter {
+self.data.iter()
+}
 }
 impl<T> IntoIterator for Ziploc<T> {
-    type Item = T;
-    type IntoIter = ::std::vec::IntoIter<T>;
-    fn into_iter(self) -> Self::IntoIter {
-        self.data.into_iter()
-    }
+type Item = T;
+type IntoIter = ::std::vec::IntoIter<T>;
+fn into_iter(self) -> Self::IntoIter {
+self.data.into_iter()
+}
 }
 fn main() {
-    let z = Ziploc { data: vec![1,2,3] };
-    // iterate by reference
-    for i in &z {
-        println!("{}", *i);
-    }
-    // iterate by value
-    for i in z {
-        println!("{}", i);
-    }
-    // can not use z again
+let z = Ziploc { data: vec![1,2,3] };
+// iterate by reference
+for i in &z {
+println!("{}", *i);
+}
+// iterate by value
+for i in z {
+println!("{}", i);
+}
+// can not use z again
 }
 {% endhighlight %}

@@ -16,15 +16,15 @@ This code is not correct.
 {% highlight rust %}
 
 pub struct MaxStack<T> {
-    max: usize,
-    data: Vec<T>,
+max: usize,
+data: Vec<T>,
 }
 
 impl<'a, T> Iterator for MaxStack<'a, T> {
-    type Item = &'a T;
-    fn next(&mut self) -> Option<Self::Item> {
-			// something?
-    }
+type Item = &'a T;
+fn next(&mut self) -> Option<Self::Item> {
+// something?
+}
 }
 {% endhighlight %}
 
@@ -43,26 +43,26 @@ structure. This does not apply to the generic.
 ### An Interator object
 {% highlight rust %}
 pub struct MaxStack<T> {
-    max: usize,
-    data: Vec<T>,
+max: usize,
+data: Vec<T>,
 }
 
 pub struct MaxStackIterator<'a, T: 'a> {
-    index: usize,
-    object: &'a MaxStack<T>,
+index: usize,
+object: &'a MaxStack<T>,
 }
 
 impl<'a, T> Iterator for MaxStackIterator<'a, T> {
-    type Item = &'a T;
-    fn next(&mut self) -> Option<Self::Item> {
-      match self.object.data.get(self.index) {
-          Some(item) => {
-              self.current_pos = self.current_pos + 1;
-              Some(item)
-          }
-          None => None,
-      }
-    }
+type Item = &'a T;
+fn next(&mut self) -> Option<Self::Item> {
+match self.object.data.get(self.index) {
+Some(item) => {
+self.current_pos = self.current_pos + 1;
+Some(item)
+}
+None => None,
+}
+}
 }
 {% endhighlight %}
 
@@ -75,16 +75,16 @@ IntoIterator.
 ### The last connection
 {% highlight rust %}
 impl<'a, T> IntoIterator for &'a MaxStack<T> {
-    type Item = &'a T;
-    type IntoIter = MaxStackIterator<'a, T>;
+type Item = &'a T;
+type IntoIter = MaxStackIterator<'a, T>;
 
-    fn into_iter(self) -> Self::IntoIter {
-        MaxStackIterator {
-            current_pos: 0,
-            object: self,
-        }
+fn into_iter(self) -> Self::IntoIter {
+MaxStackIterator {
+current_pos: 0,
+object: self,
+}
 
-    }
+}
 }
 {% endhighlight %}
 
@@ -95,5 +95,5 @@ for each.
 
 [My code]: https://github.com/sbeckeriv/rust-algorithms/blob/master/chapter-1/3/max_stack/src/stackable.rs
 
-This code was run with rustc 1.5.0 (3d7cd77e4 2015-12-04).
+This code was ran with rustc 1.5.0 (3d7cd77e4 2015-12-04).
 

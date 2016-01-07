@@ -45,14 +45,14 @@ let reader = stdin_lines::StdinLines::new();
 
 // time things. from different parts of my code
 let spent = timer::record(|| {
-    let mut x = read_ints(file_string);
-    x.sort();
-    println!("{:?}",count(x));
-    });
+let mut x = read_ints(file_string);
+x.sort();
+println!("{:?}",count(x));
+});
 println!("{:?}", spent);
 {% endhighlight %}
 
-This code was run with rustc 1.5.0 (3d7cd77e4 2015-12-04).
+This code was ran with rustc 1.5.0 (3d7cd77e4 2015-12-04).
 
 [notty]: https://github.com/withoutboats/notty
 [the docs]: https://doc.rust-lang.org/stable/std/
