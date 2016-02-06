@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ray tracing in one weekend"
-date: 2016-01-06 23:23:45 -0800
+date: 2016-02-06 23:23:45 -0800
 tags: rust raytracing
 ---
 Ray tracing in one weekend
@@ -48,27 +48,27 @@ implemented it for each material.
 ### A material:
 {% highlight rust%}
 pub trait Reflect{
-    fn reflect(&self, v: &Vec3<f32>, n: &Vec3<f32>) -> Vec3<f32> {
-        *v - (*n * v.dot(n) * 2.0)
-    }
+fn reflect(&self, v: &Vec3<f32>, n: &Vec3<f32>) -> Vec3<f32> {
+*v - (*n * v.dot(n) * 2.0)
+}
 }
 
 pub trait Scatter{
-    fn scatter(&self, r_in: &Ray, rec: &HitRecord) -> Option<(Vec3<f32>, Ray)>;
+fn scatter(&self, r_in: &Ray, rec: &HitRecord) -> Option<(Vec3<f32>, Ray)>;
 }
 pub struct Metal {
-    albedo: Vec3<f32>,
-    fuzz: f32,
+albedo: Vec3<f32>,
+fuzz: f32,
 }
 impl Metal {
-    // move to util
-    pub fn new(albedo: Vec3<f32>, fuzz: f32) -> Self { ... }
+// move to util
+pub fn new(albedo: Vec3<f32>, fuzz: f32) -> Self { ... }
 }
 
 // I dont like that scatter needs reflect. I am unsure how to force a relationship here.
 impl Reflect for Metal {}
 impl Scatter for Metal {
-    fn scatter(&self, r_in: &Ray, rec: &HitRecord) -> Option<(Vec3<f32>, Ray)> { }
+fn scatter(&self, r_in: &Ray, rec: &HitRecord) -> Option<(Vec3<f32>, Ray)> { }
 }
 {% endhighlight %}
 
@@ -77,18 +77,18 @@ Simple enough. We have some metal with with math. I left my comment in the examp
 ### An object:
 {% highlight rust%}
 pub struct Sphere {
-    pub center: Vec3<f32>,
-    pub radius: f32,
-    pub material: Rc<Scatter>,
+pub center: Vec3<f32>,
+pub radius: f32,
+pub material: Rc<Scatter>,
 }
 impl Sphere {
-    pub fn new(center: Vec3<f32>, radius: f32, material: Rc<Scatter>) -> Self {
-        Sphere {
-            center: center,
-            radius: radius,
-            material: material,
-        }
-    }
+pub fn new(center: Vec3<f32>, radius: f32, material: Rc<Scatter>) -> Self {
+Sphere {
+center: center,
+radius: radius,
+material: material,
+}
+}
 }
 {% endhighlight %}
 
