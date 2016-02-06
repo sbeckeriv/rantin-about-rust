@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ray tracing in one weekend"
-date: 2016-02-06 23:23:45 -0800
+date: 2016-02-05 11:23:45 -0800
 tags: rust raytracing
 ---
 Ray tracing in one weekend
