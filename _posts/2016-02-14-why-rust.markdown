@@ -1,0 +1,73 @@
+---
+layout: post
+title: "Why Rust"
+date: 2016-02-14 01:23:45 -0800
+tags: rust threads
+---
+Why rust.
+
+There are many reasons to pick one language over another. This is not
+that kind post. I do, however, believe current languages will peak from a speed
+perspective. One day Ruby, Python, Javascript and Java will have close
+enough speeds that it will be nothing but a personal preference of
+syntax.
+
+What excites me about rust is the concurrency story. Sure everything is
+fast and yes they can use more then one thread, but how easy is it to go from
+one thread to many threads? For the most simplest of cases it can be
+trivial (like my example shortly). A language built from the bottom up
+to deal with concurrency hopefully has a better developer story over
+one where it is a feature.
+
+Built for concurrency is not unique to rust. Go, Elixir
+and Ada are just a few others. At this point it goes back to the syntax,
+support and features of these languages. I have not written the 3
+languages I have listed. However, rust's statement about safe
+concurrency is appealing to me. The borrow checker, hated at times, is
+loved when I am worried about threads.
+
+Long story longer. I have been writing a path tracer from a book. The
+book was written in c(plus). There is more about those details in a
+[previous] post. After completing the book I am able to produce random
+scenes with nice looking shadows, metal and glass spheres. Before the
+book I did not have much exposer ray tracers and graphics. My images were not
+perfect but I was done with the book. My program runs in a reasonable amount of
+time, but why not make it faster?
+
+This whole post is coming down to one [merge request]. This merge
+request was cleaned up a little later but this commit allowed my to use
+6 of cores to do vector math. Key changes include changing from Rc to
+Arc. They are the same objects conceptually but Arc is thread safe. A total about 7
+lines of change. I wrapped 2 shared objects in Arc objects as well, but
+it turns I did not need to. Then you can say I cheated and imported a
+crate [simple_parallel] which added two lines. This wraps about 60 lines
+of thread management code in a nice slick interface.
+
+I am not here to tot a small line count. The part that felt amazing to
+me is that it worked. I know its going to work because of rust's
+borrow checker. I stated that my example was trivial before. I say this
+because all of my shared objects are read only. I know they do not
+change because rust would not let me compile. I look forward to changing
+my code to using a shared mutable object.
+
+Is it worth learning rust because it has a good concurrency concept?
+It depends on you. Concurrency does not currently have a place in my day
+to day code. I would like it to. I have spent a lot of after hours to get to a point
+where I can write and read rust. I am excited about it. I enjoy
+the syntax. I hate and love the borrow checker. Most of all I have
+enjoyed the community. I look forward to an opportunity to use rust to
+making something amazing. Until then I am just prepping.
+
+I feel like learning rust has had a positive impact on my ruby code. I
+cant quantify it, but there is something there. I feel like rust could
+be a replacement for many languages not just c/++. I do not mean in some
+far future land either. I feel like today rust could replace many things
+I do in ruby.
+
+Just some thoughts.
+
+This code was ran with rustc 1.5.0 (3d7cd77e4 2015-12-04).
+
+[previous]: http://sbeckeriv.github.io/rantin-about-rust/2016/02/06/rays-in-rust.html
+[merge request]: https://github.com/sbeckeriv/Ray-Tracing-in-One-Weekend-in-Rust/pull/1/files?w=1
+[simple_parallel]: http://huonw.github.io/simple_parallel/simple_parallel/pool/struct.Pool.html
